@@ -69,10 +69,13 @@ public class StringDemystifier {
 				index++;
 				nextIndex++;
 			}
-			
-			
 
 			demystifiedString = new String(chars);
+			
+			//Replace all sequences of 6 characters with a single character
+			demystifiedString=demystifiedString.replaceAll("(.)\\1{5,5}", "$1");
+			
+			
 		}
 
 		return demystifiedString;
