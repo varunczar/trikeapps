@@ -20,6 +20,13 @@ package com.questions;
 
 public class StringDemystifier {
 
+	//Constants
+	private static final String EXCLAMATION = "!";
+	private static final String EMPTY = "";
+	private static final char SPACE = ' ';
+	private static final char EXCLAMATION_CHAR = '!';
+
+	
 	// Encoded String
 	private String mystifiedString;
 
@@ -58,7 +65,7 @@ public class StringDemystifier {
 				if (nextIndex < length) {
 					// Check if a character has the same character to its left
 					// and right
-					if (chars[previousIndex] == chars[nextIndex] && chars[previousIndex] != ' ') {
+					if (chars[previousIndex] == chars[nextIndex] && chars[previousIndex] != SPACE) {
 						// If yes, replace it with the other character
 						chars[index] = chars[previousIndex];
 					}
@@ -75,9 +82,26 @@ public class StringDemystifier {
 			//Replace all sequences of 6 characters with a single character
 			demystifiedString=demystifiedString.replaceAll("(.)\\1{5,5}", "$1");
 			
+			//Iterate through the string till all exclamation marks have been removed
+			while(demystifiedString.contains(EXCLAMATION)){
+				
+				for(int stringIndex=0;stringIndex<length;stringIndex++)
+				{
+					//If an exclamation mark is encountered, reverse the string and remove the exclamation mark
+					if(demystifiedString.charAt(stringIndex)==EXCLAMATION_CHAR)
+					{
+						demystifiedString=demystifiedString.replaceFirst(EXCLAMATION, EMPTY);
+						length=demystifiedString.length();
+						demystifiedString=new StringBuffer(demystifiedString).reverse().toString();
+						
+					}
+				}
+				
+			}
+			
 			
 		}
-
+		//Return demystified String
 		return demystifiedString;
 	}
 
